@@ -63,5 +63,16 @@ app.put("/quotes/:id", (request, response) => {
 
 })
 
+// Del - Delete Quote by Id and replace with Empty array
+
+app.delete("/quotes/:id", (request, response)=>{
+  const id = request.params.id
+
+  quotes.splice(id, 1 , undefined)
+
+  response.status(204).send(quotes[id])
+  
+})
+
 
 app.listen(3000, () => console.log("Listening on port 3000"));
