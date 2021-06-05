@@ -1,3 +1,4 @@
+const { request, response } = require("express");
 const express = require("express");
 const app = express();
 app.use(express.json())
@@ -42,6 +43,25 @@ app.post("/quotes", function(request, response){
 
   response.status(201).send(newQuote);
 });
+
+// Put - Updating Quete by id
+
+app.put("/quotes/:id", (request, response) => {
+  const id = request.params.id
+  const quote = request.body.quote
+  const author = request.body.author
+
+  const newQuote = {
+    quote: quote,
+    author: author,
+    id: id
+  }
+
+  quotes.splice(id, 1, newQuote)
+
+  response.status(200).send(newQuote)
+
+})
 
 
 app.listen(3000, () => console.log("Listening on port 3000"));
