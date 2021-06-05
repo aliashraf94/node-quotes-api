@@ -8,7 +8,16 @@ app.get('/', function(request, response) {
 });
 
 app.get("/quotes", function(request, response){
-  response.json(quotes);
+  response.status(200).send(quotes);
+});
+
+app.get("/quotes/:id", function(request, response){
+  const id = parseInt(request.params.id)
+  const quoteByID = quotes.filter((each)=>{
+    return each.id == id
+  })
+
+  response.status(200).send(quoteByID);
 });
 
 app.listen(3000, () => console.log("Listening on port 3000"));
